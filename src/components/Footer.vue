@@ -2,7 +2,7 @@
   <v-card>
     <v-footer
       absolute
-      class="font-weight-medium mt-0 grey lighten-3"
+      class="font-weight-medium mt-0 "
       padless
       app
     >

@@ -1,0 +1,56 @@
+/* The vuetify-loader will automatically bootstrap your variables into Vue CLI’s compilation process, overwriting the framework defaults.
+When you run npm run serve, the vuetify-cli-plugin will automatically hoist the global Vuetify variables to all of your sass/scss files. When making changes to individual component variables,
+ you will still need to manually include its variables file.
+
+
+// Globals
+$body-font-family: 'Work Sans', serif;
+$border-radius-root: 6px;
+$font-size-root: 14px;
+
+// Variables must come before the import
+$btn-letter-spacing: 0;
+$btn-font-weight: 400;
+$list-item-title-font-size: 0.929rem;
+$list-item-dense-title-font-size: 0.929rem;
+$list-item-dense-title-font-weight: initial;
+$fab-icon-sizes: (
+  'small': 20
+);
+$btn-sizes: (
+  'default': 41,
+  'large': 54
+);
+
+            // GLOBAL VARIABLES
+You can access global and per component variables in Vue templates by importing from the Vuetify package.
+
+To access global SASS variables, import the main styles.scss file.
+
+<style lang="sass">
+  @import '~vuetify/src/styles/styles.sass'
+
+  @media #{map-get($display-breakpoints, 'md-and-down')}
+    .custom-class
+      display: none
+</style>
+
+            COMPONENT VARIABLES
+
+To access per component SASS variables you must import its style file from the Vuetify package.
+
+<style lang="scss">
+  @import '~vuetify/src/components/VStepper/_variables.scss';
+
+  .custom-class {
+    padding: $stepper-step-padding;
+  }
+
+  !!!!!When importing Vuetify styles, ensure that your import is prefixed with a tilde ~; e.g. ~vuetify/src/.../_variables.scss !!!
+</style>
+
+
+Duplicated CSS   --> pazi na duplikate, kod variables.scss modificiramo btn i kod overrides.sass isto modificiramo btn i dolazi do dupliciranja
+Importing a regular stylesheet into a variables file will cause massive style duplication.
+ In the following snippet, we have an overrides.sass file to modify the text-transform CSS property of v-btn.
+*/
