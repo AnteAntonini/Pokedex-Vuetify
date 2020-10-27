@@ -1,27 +1,28 @@
 <template>
   <nav id="navbar">
-    <v-app-bar app dense>     <!-- v-list can be lowered with dense property. -->
+    <v-app-bar app>     <!-- v-list can be lowered with dense property. -->
+      
       <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
 
-      <v-switch
-        v-model="$vuetify.theme.dark"
-        hint="This toggles theme mode"
-        label="Vuetify Theme Dark"
-        persistent-hint
-        dense
-      ></v-switch>  <!-- inset = Enlarge the v-switch track to encompass the thumb -->
+      <v-spacer></v-spacer>
 
-      
-      <v-toolbar-title class="flex text-center">    <!-- za centriranje title u sredinu toolbar-a !!-->
+      <v-toolbar-title>    <!-- za centriranje title u sredinu toolbar-a !!-->
         <span>Application</span>
         </v-toolbar-title>
 
       <v-spacer></v-spacer>
 
-      <v-btn icon>
-        <v-icon>mdi-dots-vertical</v-icon>
-      </v-btn>
+      <v-switch
+        v-model="$vuetify.theme.dark"
+        hint="Toggles theme mode"
+        label="Dark Mode"
+        persistent-hint
+        dense
+      ></v-switch>      <!-- inset = Enlarge the v-switch track to encompass the thumb -->
     </v-app-bar>
+
+    
+
 
     <v-navigation-drawer v-model="drawer" app temporary dark src="https://cdn.vuetifyjs.com/images/backgrounds/bg-2.jpg"> 
       <v-list shaped>            <!--  nav styling that reduces the width v-list-item takes up as well as adding a border radius. -->
@@ -56,5 +57,12 @@ export default {
 </script>
 
 <style>
-
+.v-input .v-label {
+  line-height: 15px !important;
+  font-size: 12px;
+  font-weight: bold;
+}
+.v-messages__message {
+  font-size: 10px;
+}
 </style>

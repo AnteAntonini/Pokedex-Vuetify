@@ -1,10 +1,9 @@
 <template>
-  <v-card>
     <v-footer
       absolute
-      class="font-weight-medium mt-0 "
+      class="font-weight-medium mt-0"
       padless
-      app
+      app 
     >
       <v-col
         class="text-center"
@@ -13,7 +12,6 @@
         {{ new Date().getFullYear() }} — <strong>Vuetify</strong>
       </v-col>
     </v-footer>
-  </v-card>
 </template>
 
 <script>
