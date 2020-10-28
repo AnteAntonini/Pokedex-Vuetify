@@ -33,9 +33,14 @@ export default {
       parall: [
         {src: "https://cdn.vuetifyjs.com/images/backgrounds/vbanner.jpg"},
         {src: "https://cdn.vuetifyjs.com/images/parallax/material.jpg"},
-
-      ]
+      ],
+      master: []
     }
+  },
+  created() {
+    this.axios.get('https://europe.api.riotgames.com/lor/ranked/v1/leaderboards?api_key=RGAPI-42e6d0f0-7380-47cc-98c5-c92bd21b93aa').then(response => {
+      console.log(response);
+    })
   }
 
 };
