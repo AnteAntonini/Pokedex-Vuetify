@@ -4,8 +4,7 @@
       v-model="drawer"
       app
       temporary
-      dark
-      src="https://cdn.vuetifyjs.com/images/backgrounds/bg-2.jpg"
+      src="https://cdn.bulbagarden.net/upload/a/a7/PSMD_poster.png"
     >
       <v-list shaped>   <!-- v-list can be lowered with dense property. -->
         <!--  nav styling that reduces the width v-list-item takes up as well as adding a border radius. -->
@@ -14,6 +13,7 @@
           :key="i"
           router
           :to="route"
+          style="background: #039BE5; opacity: 0.9"
         >
           <v-list-item-action>
             <v-icon>{{ icon }}</v-icon>
@@ -63,7 +63,7 @@ export default {
   data: () => ({
     drawer: false,
     items: [
-      ["mdi-email", "Inbox", "/"],
+      ["mdi-email", "Home", "/"],
       ["mdi-account-supervisor-circle", "Supervisors", "#"],
       ["mdi-clock-start", "About", "/about"]
     ]
@@ -79,5 +79,8 @@ export default {
 }
 .v-messages__message {
   font-size: 10px;
+}
+.v-list-item--active {
+  background: #0277BD !important;
 }
 </style>
