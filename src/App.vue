@@ -4,7 +4,7 @@
       <v-main  class="text-center">
         <router-view></router-view>
       </v-main>
-      <Footer absolute/>
+      <Footer/>
   </v-app>
 </template>
 

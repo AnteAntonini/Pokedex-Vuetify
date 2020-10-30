@@ -3,7 +3,8 @@
       absolute
       class="font-weight-medium mt-0"
       padless
-      app 
+      app
+      style="width: 100vw"
     >
       <v-col
         class="text-center"

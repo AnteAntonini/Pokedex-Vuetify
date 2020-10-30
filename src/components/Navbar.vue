@@ -64,7 +64,7 @@ export default {
     drawer: false,
     items: [
       ["mdi-email", "Home", "/"],
-      ["mdi-account-supervisor-circle", "Supervisors", "#"],
+      ["mdi-account-supervisor-circle", "Pokedex", "#"],
       ["mdi-clock-start", "About", "/about"]
     ]
   })
