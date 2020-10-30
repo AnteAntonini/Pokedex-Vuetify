@@ -40,13 +40,13 @@
               <div class="pl-4">Versions:
                   <span><v-icon>mdi-pokeball</v-icon></span>
               </div>
-              <v-card class="mt-11 mx-4 px-4 blue">
+              <v-card class="mt-11 mx-4 px-4 blue" style="text-transform: capitalize">
                   <v-row>
                   <v-col class="attribute-title pl-4" >Height
-                      <div class="text-black">2' 04"</div>
+                      <div class="text-black">{{pokemonHeight/10}}m</div>
                       <v-col class="pa-0 mt-3">
                         <div>Weight</div>
-                        <div class="text-black">15.2lbs</div>
+                        <div class="text-black">{{pokemonWeight/10}}kg</div>
                       </v-col> 
                       <v-col class="pa-0 my-3">
                         <div>Gender</div>
@@ -58,11 +58,11 @@
                       
                   </v-col>
                   <v-col class="attribute-title">Category
-                      <div class="text-black">Seed</div>
+                      <div class="text-black">{{pokemonCategory}}</div>
                       <v-col class="pa-0 mt-3">
                         <div>Abilities</div>
                         <div class="text-black">
-                            Overgrow
+                            {{pokemonAbility}}
                             <span><v-icon>mdi-help-circle</v-icon></span>
                             </div>
                       </v-col>
@@ -86,7 +86,11 @@ export default {
       pokemonName: this.$route.params.pokemonName,
       singlePokemon: [],
       id: "",
-      pokemonDesc: ""
+      pokemonDesc: "",
+      pokemonAbility: '',
+      pokemonWeight: '',
+      pokemonHeight: '',
+      pokemonCategory: ''
     };
   },
   async created() {
@@ -97,11 +101,13 @@ export default {
       `https://pokeapi.co/api/v2/pokemon-species/${this.pokemonName}`
     );
     const data = await res.data;
-    console.log(data);
+    this.pokemonAbility = res.data.abilities[0].ability.name;
+    this.pokemonWeight = res.data.weight;
+    this.pokemonHeight = res.data.height;
+    this.pokemonCategory = description.data.egg_groups[0  ].name;
     this.singlePokemon.push(data);
     this.id = data.id;
-    console.log(description.data);
-    this.pokemonDesc = description.data.flavor_text_entries[0].flavor_text;
+    this.pokemonDesc = description.data.flavor_text_entries[0].flavor_text; 
   }
 };
 </script>

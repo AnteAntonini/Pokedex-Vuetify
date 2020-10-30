@@ -11,10 +11,10 @@
             lg="2"
             v-for="(pokemon, index) in pokemonDetails"
             :key="pokemon.id"
-            align="center"
+            align="center" 
           >
           <v-hover v-slot="{ hover }">
-            <v-card height="300" class="text-center" :elevation="hover ? 16 : 2" :class="{ 'on-hover': hover }">    <!-- kad hover onda je elevation 16, inace je 2 -->
+            <v-card height="300" class="text-center" :elevation="hover ? 16 : 2" :class="{ 'on-hover': hover }" router :to="'/' + index++">    <!-- kad hover onda je elevation 16, inace je 2 -->
               <div style="height:70%; background: #CFD8DC">
 
               
@@ -51,11 +51,12 @@ export default {
   name: "Home",
   data() {
     return {
-      pokemonDetails: []
+      pokemonDetails: [],
+
     };
   },
   async created() {
-    const id = 50;
+    const id = 10;
     for (let i = 1; i <= id; i++) {                                     /* uradio sam async zato sto redoslijed nije bio dobar,zato sam koristio await (odredeni stavri se prije ucitaju pa poremete redoslijed) */
       const res = await this.axios.get(`https://pokeapi.co/api/v2/pokemon/${i}`)
       const data = await res.data;
