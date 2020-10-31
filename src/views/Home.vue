@@ -1,8 +1,8 @@
 <template>
   <v-app>
     <!-- v-container, onda nece ic preko footer-a  za parallax-->
-    <v-main>
-      <v-container>
+    <v-main class="pa-0 pt-3">
+      <v-container style="background: white; height: 100%" >
         <v-row >
           <v-col
             cols="6"
@@ -14,7 +14,7 @@
             align="center" 
           >
           <v-hover v-slot="{ hover }">
-            <v-card height="300" class="text-center" :elevation="hover ? 16 : 2" :class="{ 'on-hover': hover }" router :to="'/' + index++">    <!-- kad hover onda je elevation 16, inace je 2 -->
+            <v-card height="300" class="text-center" :elevation="hover ? 16 : 2" :class="{ 'on-hover': hover }" router :to="'/' + (index+1)">    <!-- kad hover onda je elevation 16, inace je 2 -->
               <div style="height:70%; background: #CFD8DC">
 
               
@@ -81,6 +81,11 @@ export default {
   width: 45px;
   margin: 0 auto;
   border-radius: 5px;
+}
+
+.v-main {
+  background-image: url('https://image.freepik.com/free-vector/subtle-white-background-with-diagonal-lines_1017-14763.jpg');
+  background-size: cover;
 }
 
 .v-card {

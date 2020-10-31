@@ -4,7 +4,7 @@
       class="font-weight-medium mt-0"
       padless
       app
-      style="width: 100vw"
+      style="width: 100vw; background: #616161"
     >
       <v-col
         class="text-center"

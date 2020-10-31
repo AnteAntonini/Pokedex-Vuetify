@@ -1,14 +1,14 @@
 <template>
   <v-app>
-    <v-main>
+    <v-main class="pa-0 ">
       <v-container
-        style="margin: 0 150px 0 150px; background: red; height: 100%"
+        style="margin: 0 150px 20px 150px;  height: 100%"
       >
         <v-card
           v-for="pokemon in singlePokemon"
           :key="pokemon.id"
-          style="width: 90%"
-          class="mx-auto"
+          style="width: 90%; height: 1000px"
+          class="mx-auto mt-10"
         >
           <v-row>
             <v-col cols="12">
@@ -31,6 +31,9 @@
                 "
                 style="height: 400px; width:400px; background: #f2f2f2"
               ></v-img>
+              <v-col align="left" style="width: 400px; height:250px; background: grey" >
+                Stats
+              </v-col>
             </v-col>
 
             <v-col cols="6" class="text-left">
@@ -66,10 +69,21 @@
                             <span><v-icon>mdi-help-circle</v-icon></span>
                             </div>
                       </v-col>
-                      
                   </v-col>
                   </v-row>
               </v-card>
+              <v-col>
+                <div>Type</div>
+                <span class="mr-2" v-for="type in pokemonType" :key="type.id" style="display: inline-block">
+                  {{type.type.name}}
+                </span>
+              </v-col>
+              <v-col>
+                <div>Weaknesses</div>
+                <span class="mr-2" v-for="weakness in pokemonWeakness" :key="weakness.id" style="display: inline-block">
+                  {{weakness.name}}
+                </span>
+              </v-col>
             </v-col>
           </v-row>
         </v-card>
@@ -90,7 +104,10 @@ export default {
       pokemonAbility: '',
       pokemonWeight: '',
       pokemonHeight: '',
-      pokemonCategory: ''
+      pokemonCategory: '',
+      pokemonType: [],
+      pokemonStats: [],
+      pokemonWeakness: []
     };
   },
   async created() {
@@ -100,7 +117,12 @@ export default {
     const description = await this.axios.get(
       `https://pokeapi.co/api/v2/pokemon-species/${this.pokemonName}`
     );
+    const weak = await this.axios.get(`https://pokeapi.co/api/v2/type/${this.pokemonName}`);
     const data = await res.data;
+
+    this.pokemonWeakness = weak.data.damage_relations.double_damage_from;
+    this.pokemonType = res.data.types;
+    this.pokemonStats = res.data.stats;
     this.pokemonAbility = res.data.abilities[0].ability.name;
     this.pokemonWeight = res.data.weight;
     this.pokemonHeight = res.data.height;
@@ -113,6 +135,15 @@ export default {
 </script>
 
 <style scoped>
+.container {
+  background-image: url('https://image.freepik.com/free-vector/subtle-white-background-with-diagonal-lines_1017-14763.jpg');
+  background-size: cover;
+}
+.v-main {
+  background-image: url('https://images2.alphacoders.com/474/thumb-350-474391.jpg');
+  background-size: cover;
+}
+
 .attribute-title {
     color: white;
 }
