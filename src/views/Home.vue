@@ -66,7 +66,9 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+@import "@/scss/_typeBackgroundColor.scss";
+
 .full-width-section.parallax_section .row-bg,
 .full-width-content.parallax_section .row-bg {
   margin-top: -150px !important;
@@ -97,59 +99,5 @@ export default {
   border-radius: 50% !important;
 }
 
-.type.normal {
-  background: #a4acaf;;
-}
-.type.grass{
-  background: #9bcc50;
-}
-.type.fire{
-  background: #fd7d24;;
-}
-.type.bug{
-  background: #729f3f;
-}
-.type.water{
-  background: lightblue;
-}
-.type.poison {
-  background: #b97fc9;
-}
-.type.electric {
-  background: #eed535;
-}
-.type.ground {
-  background: linear-gradient(180deg, #f7de3f 50%, #ab9842 50%);;
-}
-.type.fairy {
-  background: #fdb9e9;
-}
-.type.fighting {
-  background: #ae561f;
-}
-.type.psychic {
-  background: #f366b9;
-}
-.type.rock {
-  background: #a38c21;
-}
-.type.ghost {
-  background: #7b62a3;
-}
-.type.ice {
-  background: #51c4e7;
-}
-.type.dragon {
-  background: linear-gradient(180deg, #53a4cf 50%, #f16e57 50%);
-}
-.type.dark {
-  background: #707070;
-}
-.type.steel {
-  background: #9eb7b8;
-}
-.type.flying {
-  background: linear-gradient(180deg, #3dc7ef 50%, #bdb9b8 50%);
-}
 </style>
 
