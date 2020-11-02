@@ -56,7 +56,7 @@ export default {
     };
   },
   async created() {
-    const id = 10;
+    const id = 20;
     for (let i = 1; i <= id; i++) {                                     /* uradio sam async zato sto redoslijed nije bio dobar,zato sam koristio await (odredeni stavri se prije ucitaju pa poremete redoslijed) */
       const res = await this.axios.get(`https://pokeapi.co/api/v2/pokemon/${i}`)
       const data = await res.data;
