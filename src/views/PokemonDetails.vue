@@ -1,12 +1,12 @@
   <template>
   <v-app>
     <v-main class="pa-0 ">
-      <v-container style="margin: 0 150px 20px 150px;  height: 100%">
+      <v-container style="mb-15 height: 100%" class="px-0">
         <v-card
           v-for="pokemon in singlePokemon"
           :key="pokemon.id"
-          style="width: 90%; height: 1000px"
-          class="mx-auto mt-10"
+          style="width: 90%; height: 100%px"
+          class="v-card-container mx-auto mt-10"
         >
           <v-row>
             <v-col cols="12">
@@ -21,7 +21,7 @@
               </v-card-title>
             </v-col>
           </v-row>
-          <v-row class="px-4">
+          <v-row class="row-container px-4">
             <v-col  cols="12" sm="6">
               <v-img
                 :src="
@@ -29,7 +29,7 @@
                 "
                 style="height: 400px; width:450px; background: #f2f2f2"
               ></v-img>
-              <div class="pokemon-stats-info">
+              <div class="pokemon-stats-info ">
                 <v-col
                   align="left"
                   class="mt-2 pa-0"
@@ -52,7 +52,7 @@
                 </v-col>
               </div>
             </v-col>
-
+            
             <v-col cols="12" sm="6" class="text-left">
               <v-card-text>
                 {{ pokemonDesc }}
@@ -106,7 +106,7 @@
                 <div class="type-weakness mt-2">Type</div>
                 <span
                   :class="
-                    `type ${type.type.name} mr-2 py-1 text-center type-style`
+                    `type ${type.type.name} mr-2 mt-2 py-1 text-center type-style`
                   "
                   v-for="type in pokemonType"
                   :key="type.id"
@@ -130,16 +130,15 @@
           </v-row>
         </v-card>
         <v-row>
-          <v-col cols="8" sm="6">
-             <v-container cols="6">
-          <canvas 
-            id="planet-chart"
-            style="width: 450px; height: 290px;"
-          ></canvas>
-        </v-container>
+          <v-col cols="12" sm="6">
+            <v-container cols="6">
+              <canvas 
+                id="planet-chart"
+                style="width: 450px; height: 290px;"
+              ></canvas>
+            </v-container>
           </v-col>
         </v-row>
-       
       </v-container>
     </v-main>
   </v-app>
@@ -228,8 +227,6 @@ export default {
 
     this.chartBackgroundColor = Array(6).fill(1).map(i => ('#4592c4'));
 
-    console.log(this.chartBackgroundColor)
-
     this.pokemonAbility = res.data.abilities[0].ability.name;
     this.pokemonWeight = res.data.weight;
     this.pokemonHeight = res.data.height;
@@ -280,5 +277,14 @@ li {
   height: 8px;
   list-style: none;
   border: 1px solid white;
+}
+
+@media all and (max-width: 960px) {
+  .v-card-container {
+    width: 100% !important;
+  }
+  .row-container {
+    padding: 0;
+  }
 }
 </style>

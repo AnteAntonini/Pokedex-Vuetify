@@ -5,6 +5,8 @@
       app
       temporary
       src="https://cdn.bulbagarden.net/upload/a/a7/PSMD_poster.png"
+      style="height: 100%"
+      class="v-navigation-drawer"
     >
       <v-list shaped>   <!-- v-list can be lowered with dense property. -->
         <!--  nav styling that reduces the width v-list-item takes up as well as adding a border radius. -->
@@ -40,13 +42,13 @@
 
       <v-spacer></v-spacer>
 
-      <v-switch
+      <!-- <v-switch                          //switch dark theme
         v-model="$vuetify.theme.dark"
         hint="Toggles theme mode"
         label="Dark Mode"
         persistent-hint
         dense
-      ></v-switch>
+      ></v-switch> -->
       <!-- inset = Enlarge the v-switch track to encompass the thumb -->
 
       <!-- <v-btn icon>
@@ -82,5 +84,11 @@ export default {
 }
 .v-list-item--active {
   background: #0277BD !important;
+}
+
+@media all and (max-width: 600px) {
+  .v-navigation-drawer {
+    width: 70% !important;
+  }
 }
 </style>
