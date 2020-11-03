@@ -37,7 +37,7 @@
 
       <v-toolbar-title>
         <!-- za centriranje title u sredinu toolbar-a !!-->
-        <span>Application</span>
+        <span class="mr-7">Pokedex</span>
       </v-toolbar-title>
 
       <v-spacer></v-spacer>

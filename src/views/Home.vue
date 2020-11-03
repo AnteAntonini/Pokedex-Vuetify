@@ -17,9 +17,9 @@
             <v-card height="300" class="text-center" :elevation="hover ? 16 : 2" :class="{ 'on-hover': hover }" router :to="'/' + (index+1)">    <!-- kad hover onda je elevation 16, inace je 2 -->
               <div style="height:70%; background: #CFD8DC">
 
-              
-              <v-avatar size="140" color="grey lighten-2">
-                <v-img class="pokemon-image" :src="pokemon.sprites.front_default"></v-img>
+              <v-avatar  size="140" color="grey lighten-2" > 
+                <v-img class="pokemon-image" 
+                :src="`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${index + 1}.png`"></v-img>
               </v-avatar>
               <div class="number my-3 white blue-grey lighten-2">#{{ index + 1 }}</div>
               <v-card-title
@@ -56,7 +56,7 @@ export default {
     };
   },
   async created() {
-    const id = 20;
+    const id = 50;
     for (let i = 1; i <= id; i++) {                                     /* uradio sam async zato sto redoslijed nije bio dobar,zato sam koristio await (odredeni stavri se prije ucitaju pa poremete redoslijed) */
       const res = await this.axios.get(`https://pokeapi.co/api/v2/pokemon/${i}`)
       const data = await res.data;

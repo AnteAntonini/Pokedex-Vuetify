@@ -24,6 +24,7 @@
           <v-row class="row-container px-4">
             <v-col  cols="12" sm="6">
               <v-img
+              class="pokemon-image"
                 :src="
                   `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png`
                 "
@@ -114,7 +115,7 @@
                   {{ type.type.name }}
                 </span>
               </v-col>
-              <v-col>
+             <!--  <v-col>
                 <div class="type-weakness">Weaknesses</div>
                 <span
                   :class="
@@ -125,7 +126,7 @@
                 >
                   {{ weakness.name }}
                 </span>
-              </v-col>
+              </v-col> -->
             </v-col>
           </v-row>
         </v-card>
@@ -212,12 +213,12 @@ export default {
     const description = await this.axios.get(
       `https://pokeapi.co/api/v2/pokemon-species/${this.pokemonName}`
     );
-    const weak = await this.axios.get(
+    /* const weak = await this.axios.get(
       `https://pokeapi.co/api/v2/type/${this.pokemonName}`
-    );
+    ); */
     const data = await res.data;
 
-    this.pokemonWeakness = weak.data.damage_relations.double_damage_from;
+    /* this.pokemonWeakness = weak.data.damage_relations.double_damage_from; */
     this.pokemonType = res.data.types;
     this.pokemonStats = res.data.stats;
 
@@ -285,6 +286,10 @@ li {
   }
   .row-container {
     padding: 0;
+  }
+  .pokemon-image {
+    height: 350px !important;
+    width: 100%  !important;
   }
 }
 </style>
