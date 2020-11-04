@@ -1,103 +1,109 @@
 <template>
   <v-app>
-    <!-- v-container, onda nece ic preko footer-a  za parallax-->
-    <v-main class="pa-0 pt-3">
-      <v-container style="background: white; height: 100%" >
-        <v-row >
-          <v-col
-            cols="6"
-            sm="4"
-            md="3"
-            lg="2"
-            v-for="(pokemon, index) in pokemonDetails"
-            :key="pokemon.id"
-            align="center" 
-          >
-          <v-hover v-slot="{ hover }">
-            <v-card height="300" class="text-center" :elevation="hover ? 16 : 2" :class="{ 'on-hover': hover }" router :to="'/' + (index+1)">    <!-- kad hover onda je elevation 16, inace je 2 -->
-              <div style="height:70%; background: #CFD8DC">
-
-              <v-avatar  size="140" color="grey lighten-2" > 
-                <v-img class="pokemon-image" 
-                :src="`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${index + 1}.png`"></v-img>
-              </v-avatar>
-              <div class="number my-3 white blue-grey lighten-2">#{{ index + 1 }}</div>
-              <v-card-title
-                class="py-0 px-0 mb-0 mt-6 justify-center"
-                style="font-size: 25px; text-transform: capitalize;font-family: sans-serif;"
-              >
-                <!-- JUSTIFY CENTER ZA V-CARD-TITLE I V-CARD-ACTIONS -->
-                <h5>{{ pokemon.name }}</h5>
-              </v-card-title>
-              <v-card-text class="pa-0" style="font-size: 12px">
-                <span
-                 :class="`type ${types.type.name} mt-1 mx-2 `" v-for="types in pokemon.types" :key="types.id"
-                style="color: white; border-radius: 5px; display:inline-block; width: 70px">
-                 {{ types.type.name }}
-                </span>
-              </v-card-text>
-              </div>
-            </v-card>
-            </v-hover>
+    <v-main class="pa-0" app>
+      <v-parallax
+        dark
+        src="https://cdn.vuetifyjs.com/images/parallax/material.jpg"
+        style="transform: none; height: 100%"
+      >
+        <v-row align="center" justify="center">
+          <v-col class="text-center" cols="12">
+            <h1 class="heading display-3 font-weight-thin  mb-5" style="position: relative; top: -100px;" >
+              Pokedex
+            </h1>
+            <h4 class="subheading" style="position: relative; top: -100px;">
+              Explore all pokemons
+            </h4>
+            <v-btn class="pulse-button mt-10" to="/pokedex" >Explore</v-btn>
           </v-col>
         </v-row>
-      </v-container>
+      </v-parallax>
     </v-main>
   </v-app>
 </template>
 
 <script>
 export default {
-  name: "Home",
-  data() {
-    return {
-      pokemonDetails: [],
-
-    };
-  },
-  async created() {
-    const id = 50;
-    for (let i = 1; i <= id; i++) {                                     /* uradio sam async zato sto redoslijed nije bio dobar,zato sam koristio await (odredeni stavri se prije ucitaju pa poremete redoslijed) */
-      const res = await this.axios.get(`https://pokeapi.co/api/v2/pokemon/${i}`)
-      const data = await res.data;
-      this.pokemonDetails.push(data);
-    }
-  }
-};
+    
+}
 </script>
 
-<style lang="scss" scoped>
-@import "@/scss/_typeBackgroundColor.scss";
-
-.full-width-section.parallax_section .row-bg,
-.full-width-content.parallax_section .row-bg {
-  margin-top: -150px !important;
+<style scoped>    /* >>> deep selector (ako ne radi bez toga) */
+  
+* >>>.v-parallax__image { 
+    transform: translate(-50%, 200px) !important;
 }
 
-.v-card.on-hover {    /* kad hoveramo card ce se pomaknuti za 5px gore */
-  position: relative; 
-  top: -7px;
+
+
+.pulse-button {
+  width: 150px;
+  height: 50px !important;
+  color: #313133;
+  background: #4FD1C5;
+  background: linear-gradient(90deg, rgba(129,230,217,1) 0%, rgba(79,209,197,1) 100%);
+  border: none;
+  border-radius: 100px;
+  box-shadow: 12px 12px 24px rgba(79,209,197,.64);
+  transition: all 0.3s ease-in-out 0s;
+  outline: none;
+  }
+
+.pulse-button::before {
+  content: '';
+  border-radius: 100px;
+  min-width: 220px;
+  min-height: 80px;
+  border: 6px solid #00FFCB;
+  box-shadow: 0 0 60px rgba(0,255,203,.64);
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: all .3s ease-in-out 0s;
+  margin-left: 75px;
+  margin-top: 25px;
 }
 
-.number {
-  width: 45px;
-  margin: 0 auto;
-  border-radius: 5px;
+.pulse-button:hover, .button:focus {
+  color: #313133;
+  transform: translateY(-6px);
 }
 
-.v-main {
-  background-image: url('https://image.freepik.com/free-vector/subtle-white-background-with-diagonal-lines_1017-14763.jpg');
-  background-size: cover;
+.pulse-button:hover::before, button:focus::before {
+  opacity: 1;
 }
 
-.v-card {
-  width: 200px !important;
+.pulse-button::after {
+  content: '';
+  width: 30px; height: 30px;
+  border-radius: 100%;
+  border: 6px solid #00FFCB;
+  position: absolute;
+  z-index: -1;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation: ring 1.5s infinite;
 }
 
-.v-avatar {
-  margin-top: 10px;
-  border-radius: 50% !important;
+.pulse-button:hover::after, button:focus::after {
+  animation: none;
+  display: none;
 }
+
+
+
+@keyframes ring {
+  0% {
+    width: 30px;
+    height: 30px;
+    opacity: 1;
+  }
+  100% {
+    width: 200px;
+    height: 200px;
+    opacity: 0;
+  }
+}
+
 
 </style>
-

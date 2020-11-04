@@ -1,7 +1,6 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
-import goTo from 'vuetify/es5/services/goto'
 
 Vue.use(VueRouter);
 
@@ -21,7 +20,13 @@ const routes = [
       import(/* webpackChunkName: "about" */ "../views/About.vue")
   },
   {
-    path: "/:pokemonName",
+    path: "/pokedex",
+    name: "Pokedex",
+    component: () =>
+      import(/* webpackChunkName: "about" */ "../views/Pokedex.vue")
+  },
+  {
+    path: "/pokedex/:pokemonName",
     name: "PokemonDetails",
     component: () =>
       import(/* webpackChunkName: "PokemonDetails" */ "../views/PokemonDetails.vue")

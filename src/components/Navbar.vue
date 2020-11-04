@@ -29,15 +29,23 @@
     </v-navigation-drawer>
     
 
-    <v-app-bar app>
+    <v-app-bar app >
 
       <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
 
       <v-spacer></v-spacer>
 
       <v-toolbar-title>
+        <v-btn to="/"  text 
+        style="width: 180px; height: 64px; color: #f5f5f5;" class="pl-8 mr-10">
+
         <!-- za centriranje title u sredinu toolbar-a !!-->
-        <span class="mr-7">Pokedex</span>
+        <v-img src="https://assets.webiconspng.com/uploads/2017/09/Pokemon-Logo-PNG-Image-20961-300x169.png"
+         
+        style="height: 55px; width: 155px"
+        class="mr-10"
+        ></v-img>
+        </v-btn>
       </v-toolbar-title>
 
       <v-spacer></v-spacer>
@@ -65,9 +73,9 @@ export default {
   data: () => ({
     drawer: false,
     items: [
-      ["mdi-email", "Home", "/"],
-      ["mdi-account-supervisor-circle", "Pokedex", "#"],
-      ["mdi-clock-start", "About", "/about"]
+      ["mdi-home-import-outline", "Home", "/"],
+      ["mdi-pokeball", "Pokedex", "/pokedex"],
+      ["mdi-information-outline", "About", "/about"]
     ]
   })
 };
