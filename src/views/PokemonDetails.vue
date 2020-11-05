@@ -11,19 +11,51 @@
           <v-row>
             <v-col cols="12" class="pt-0">
               <div class="d-flex flex-row">
-                <v-btn class="previous grey" @click="reloadPage" :to="'/pokedex/' + paginationLeft">
-                  <div class="pokedex-pokemon-pagination-wrapper d-flex justify-space-around" style="width: 100%; height: 100%">
-                    <span class="arrow-icon arrow-left"><v-icon>mdi-arrow-left</v-icon></span>
-                    <span class="pagination-number left align-self-center ">#{{paginationLeft}}</span>
-                    <span class="pagination-pokemon left align-self-center mr-15">
-                    {{pokemonNamesPagination[paginationLeft - 1].name}}</span>
+                <v-btn
+                  class="previous grey"
+                  @click="reloadPage"
+                  :to="'/pokedex/' + paginationLeft"
+                >
+                  <div
+                    class="pokedex-pokemon-pagination-wrapper d-flex justify-space-around"
+                    style="width: 100%; height: 100%"
+                  >
+                    <span class="arrow-icon arrow-left"
+                      ><v-icon>mdi-arrow-left</v-icon></span
+                    >
+                    <span class="pagination-number left align-self-center "
+                      >#{{ paginationLeft }}</span
+                    >
+                    <span
+                      class="pagination-pokemon left align-self-center mr-15"
+                    >
+                      {{
+                        pokemonNamesPagination[paginationLeft - 1].name
+                      }}</span
+                    >
                   </div>
                 </v-btn>
-                <v-btn class="next grey" @click="reloadPage" :to="'/pokedex/' + paginationRight">
-                  <div class="pokedex-pokemon-pagination-wrapper d-flex justify-space-around" style="width: 100%; height: 100%">           
-                    <span class="pagination-pokemon right align-self-center ml-15">{{pokemonNamesPagination[paginationRight - 1].name}}</span>
-                    <span class="pagination-number right align-self-center" >#{{paginationRight}}</span>
-                    <span class="arrow-icon arrow-right"><v-icon>mdi-arrow-right</v-icon></span>
+                <v-btn
+                  class="next grey"
+                  @click="reloadPage"
+                  :to="'/pokedex/' + paginationRight"
+                >
+                  <div
+                    class="pokedex-pokemon-pagination-wrapper d-flex justify-space-around"
+                    style="width: 100%; height: 100%"
+                  >
+                    <span
+                      class="pagination-pokemon right align-self-center ml-15"
+                      >{{
+                        pokemonNamesPagination[paginationRight - 1].name
+                      }}</span
+                    >
+                    <span class="pagination-number right align-self-center"
+                      >#{{ paginationRight }}</span
+                    >
+                    <span class="arrow-icon arrow-right"
+                      ><v-icon>mdi-arrow-right</v-icon></span
+                    >
                   </div>
                 </v-btn>
               </div>
@@ -114,7 +146,40 @@
                       <div>Abilities</div>
                       <div class="text-black">
                         {{ pokemonAbility }}
-                        <span><v-icon>mdi-help-circle</v-icon></span>
+
+                        <v-dialog v-model="dialog" max-width="400px">
+                          <template v-slot:activator="{ on, attrs }">
+                            <span v-bind="attrs" v-on="on">
+                              <v-icon>mdi-help-circle</v-icon></span
+                            >
+                          </template>
+                          <v-card style="background: #313131; height: 180px">
+                            <v-card-title
+                              class="card-title pr-0 pt-0"
+                              style="color: grey; font-size: 15px"
+                            >
+                              Ability Info
+                              <v-spacer></v-spacer>
+                              <v-card-actions class="pr-0 pt-0">
+                                <v-btn
+                                  class="black"
+                                  color="white"
+                                  text
+                                  @click="dialog = false"
+                                >
+                                  <v-icon>mdi-close</v-icon>Close
+                                </v-btn>
+                              </v-card-actions>
+                            </v-card-title>
+                            <v-card-text
+                              style="color: white; font-size: 25px; text-transform: capitalize"
+                              >{{ pokemonAbility }}
+                              <p class="mt-3" style="font-size: 12px">
+                                {{PokemonAbilityDetailed}}
+                              </p>
+                            </v-card-text>
+                          </v-card>
+                        </v-dialog>
                       </div>
                     </v-col>
                   </v-col>
@@ -186,7 +251,9 @@ export default {
       chartBackgroundColor: [],
       paginationLeft: '',
       paginationRight: '',
-      pokemonNamesPagination: []
+      pokemonNamesPagination: [],
+      dialog: false,
+      PokemonAbilityDetailed: ''
    }
   },
   methods: {
@@ -237,6 +304,14 @@ export default {
       `https://pokeapi.co/api/v2/pokemon-species/${this.pokemonName}`
     );
 
+    const ability = await this.axios.get(
+      `https://pokeapi.co/api/v2/ability/${res.data.abilities[0].ability.name}`
+      
+    );
+    
+    this.PokemonAbilityDetailed = ability.data.effect_entries[1].short_effect;
+    console.log(this.PokemonAbilityDetailed)
+
     for (let i = 1; i <= 50; i++) {         //zbog redoslijeda
       const resNames = await this.axios.get(`https://pokeapi.co/api/v2/pokemon/${i}`)
       const namesArray = await resNames.data;
@@ -278,7 +353,6 @@ export default {
     }
   },
   beforeUpdate() {
-  
   this.createChart('planet-chart');
   }
 };
@@ -302,7 +376,7 @@ export default {
   width: 49.5%;
   height: 60px !important;
   &:hover {
-    background: #2196F3 !important;
+    background: #2196f3 !important;
   }
 }
 .next {
@@ -310,7 +384,7 @@ export default {
   width: 50%;
   height: 60px !important;
   &:hover {
-    background: #2196F3 !important;
+    background: #2196f3 !important;
   }
 }
 .arrow-icon {
@@ -330,8 +404,6 @@ export default {
     color: white;
   }
 }
-
-
 
 .type-weakness {
   margin-bottom: 16px;
@@ -358,9 +430,6 @@ li {
   list-style: none;
   border: 1px solid white;
 }
-
-
-
 
 @media all and (max-width: 960px) {
   .v-card-container {
