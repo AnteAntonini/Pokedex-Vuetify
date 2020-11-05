@@ -34,7 +34,7 @@
       <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
 
       <v-spacer></v-spacer>
-
+  
       <v-toolbar-title>
         <v-btn to="/"  text 
         style="width: 180px; height: 64px; color: #f5f5f5;" class="pl-8 mr-10">

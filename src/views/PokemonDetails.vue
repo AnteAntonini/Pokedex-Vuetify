@@ -9,9 +9,26 @@
           class="v-card-container mx-auto mt-10"
         >
           <v-row>
-            <v-col cols="12">
+            <v-col cols="12" class="pt-0">
+              <div class="d-flex flex-row">
+                <v-btn class="previous grey" @click="reloadPage" :to="'/pokedex/' + paginationLeft">
+                  <div class="pokedex-pokemon-pagination-wrapper d-flex justify-space-around" style="width: 100%; height: 100%">
+                    <span class="arrow-icon arrow-left"><v-icon>mdi-arrow-left</v-icon></span>
+                    <span class="pagination-number left align-self-center ">#{{paginationLeft}}</span>
+                    <span class="pagination-pokemon left align-self-center mr-15">
+                    {{pokemonNamesPagination[paginationLeft - 1].name}}</span>
+                  </div>
+                </v-btn>
+                <v-btn class="next grey" @click="reloadPage" :to="'/pokedex/' + paginationRight">
+                  <div class="pokedex-pokemon-pagination-wrapper d-flex justify-space-around" style="width: 100%; height: 100%">           
+                    <span class="pagination-pokemon right align-self-center ml-15">{{pokemonNamesPagination[paginationRight - 1].name}}</span>
+                    <span class="pagination-number right align-self-center" >#{{paginationRight}}</span>
+                    <span class="arrow-icon arrow-right"><v-icon>mdi-arrow-right</v-icon></span>
+                  </div>
+                </v-btn>
+              </div>
               <v-card-title
-                class="justify-center"
+                class="justify-center mt-4 pt-0"
                 style="font-size: 35px; text-transform: capitalize;font-family: sans-serif"
               >
                 {{ pokemon.name }}
@@ -22,9 +39,9 @@
             </v-col>
           </v-row>
           <v-row class="row-container px-4">
-            <v-col  cols="12" sm="6">
+            <v-col cols="12" sm="6">
               <v-img
-              class="pokemon-image"
+                class="pokemon-image"
                 :src="
                   `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png`
                 "
@@ -53,7 +70,7 @@
                 </v-col>
               </div>
             </v-col>
-            
+
             <v-col cols="12" sm="6" class="text-left">
               <v-card-text>
                 {{ pokemonDesc }}
@@ -115,7 +132,7 @@
                   {{ type.type.name }}
                 </span>
               </v-col>
-             <!--  <v-col>
+              <!--  <v-col>
                 <div class="type-weakness">Weaknesses</div>
                 <span
                   :class="
@@ -133,7 +150,7 @@
         <v-row>
           <v-col cols="12" sm="6">
             <v-container cols="6">
-              <canvas 
+              <canvas
                 id="planet-chart"
                 style="width: 450px; height: 290px;"
               ></canvas>
@@ -166,7 +183,10 @@ export default {
       pokemonWeakness: [],
       pokemonStatsInfo: ['HP','Attack','Defense','Special Attack','Special Defense', 'Speed'],
       pokemonStatsData: [],
-      chartBackgroundColor: []
+      chartBackgroundColor: [],
+      paginationLeft: '',
+      paginationRight: '',
+      pokemonNamesPagination: []
    }
   },
   methods: {
@@ -204,6 +224,9 @@ export default {
            }
          }
        });
+    },
+    reloadPage(){
+      window.location.reload()
     }
   },
   async created() {
@@ -213,11 +236,20 @@ export default {
     const description = await this.axios.get(
       `https://pokeapi.co/api/v2/pokemon-species/${this.pokemonName}`
     );
+
+    for (let i = 1; i <= 50; i++) {         //zbog redoslijeda
+      const resNames = await this.axios.get(`https://pokeapi.co/api/v2/pokemon/${i}`)
+      const namesArray = await resNames.data;
+      this.pokemonNamesPagination.push(namesArray);
+    }
+
+
     /* const weak = await this.axios.get(
       `https://pokeapi.co/api/v2/type/${this.pokemonName}`
     ); */
-    const data = await res.data;
 
+    const data = await res.data;
+    
     /* this.pokemonWeakness = weak.data.damage_relations.double_damage_from; */
     this.pokemonType = res.data.types;
     this.pokemonStats = res.data.stats;
@@ -235,8 +267,18 @@ export default {
     this.singlePokemon.push(data);
     this.id = data.id;
     this.pokemonDesc = description.data.flavor_text_entries[0].flavor_text;
+
+    this.paginationLeft = this.id - 1;
+    if(this.paginationLeft <= 0) {
+      this.paginationLeft = 50;
+    }
+    this.paginationRight = this.id + 1;
+    if(this.paginationRight > 50) {
+      this.paginationRight = 1;
+    }
   },
   beforeUpdate() {
+  
   this.createChart('planet-chart');
   }
 };
@@ -253,6 +295,43 @@ export default {
   background-image: url("https://images2.alphacoders.com/474/thumb-350-474391.jpg");
   background-size: cover;
 }
+
+//BUTTONS
+.previous {
+  margin-right: 0.25%;
+  width: 49.5%;
+  height: 60px !important;
+  &:hover {
+    background: #2196F3 !important;
+  }
+}
+.next {
+  margin-left: 0.25%;
+  width: 50%;
+  height: 60px !important;
+  &:hover {
+    background: #2196F3 !important;
+  }
+}
+.arrow-icon {
+  border-radius: 50%;
+  padding: 3px 4px 4px 4px;
+  background: white;
+}
+
+.pagination {
+  &-pokemon {
+    font-size: 22px;
+    text-transform: capitalize;
+    color: rgb(70, 64, 64);
+  }
+  &-number {
+    font-size: 20px;
+    color: white;
+  }
+}
+
+
 
 .type-weakness {
   margin-bottom: 16px;
@@ -280,6 +359,9 @@ li {
   border: 1px solid white;
 }
 
+
+
+
 @media all and (max-width: 960px) {
   .v-card-container {
     width: 100% !important;
@@ -289,7 +371,14 @@ li {
   }
   .pokemon-image {
     height: 350px !important;
-    width: 100%  !important;
+    width: 100% !important;
+  }
+  .pokedex-pokemon-pagination-wrapper {
+    display: flex;
+    justify-content: space-between !important;
+  }
+  .pagination-pokemon {
+    display: none;
   }
 }
 </style>

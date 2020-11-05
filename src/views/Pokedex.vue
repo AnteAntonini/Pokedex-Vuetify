@@ -57,7 +57,7 @@ export default {
   },
   async created() {
     const id = 50;
-    for (let i = 1; i <= id; i++) {                                     /* uradio sam async zato sto redoslijed nije bio dobar,zato sam koristio await (odredeni stavri se prije ucitaju pa poremete redoslijed) */
+    for (let i = 1; i <= id; i++) {               /* uradio sam async zato sto redoslijed nije bio dobar,zato sam koristio await (odredeni stavri se prije ucitaju pa poremete redoslijed) */
       const res = await this.axios.get(`https://pokeapi.co/api/v2/pokemon/${i}`)
       const data = await res.data;
       this.pokemonDetails.push(data);
