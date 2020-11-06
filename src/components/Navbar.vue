@@ -40,10 +40,9 @@
         style="width: 180px; height: 64px; color: #f5f5f5;" class="pl-8 mr-10">
 
         <!-- za centriranje title u sredinu toolbar-a !!-->
-        <v-img src="https://assets.webiconspng.com/uploads/2017/09/Pokemon-Logo-PNG-Image-20961-300x169.png"
-         
+        <v-img src="@/assets/Pokemon-Logo.png"
         style="height: 55px; width: 155px"
-        class="mr-10"
+        class="image-navbar mr-10"
         ></v-img>
         </v-btn>
       </v-toolbar-title>
@@ -97,6 +96,11 @@ export default {
 @media all and (max-width: 600px) {
   .v-navigation-drawer {
     width: 70% !important;
+  }
+  .image-navbar {
+    height: 45px !important;
+    width: 110px !important;
+    margin-left: 15px;
   }
 }
 </style>

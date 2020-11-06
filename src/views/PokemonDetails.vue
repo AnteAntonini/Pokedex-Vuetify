@@ -314,9 +314,9 @@ export default {
     );
     
     this.PokemonAbilityDetailed = ability.data.effect_entries[1].short_effect;
-    console.log(this.PokemonAbilityDetailed)
+    
     this.PokemonAbilityDetailedOther = ability.data.effect_entries[0].short_effect;
-    console.log(this.PokemonAbilityDetailedOther)
+    
 
     for (let i = 1; i <= 50; i++) {         //zbog redoslijeda
       const resNames = await this.axios.get(`https://pokeapi.co/api/v2/pokemon/${i}`)

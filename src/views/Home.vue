@@ -4,7 +4,8 @@
       <v-parallax
         dark
         src="https://cdn.vuetifyjs.com/images/parallax/material.jpg"
-        style="transform: none; height: 100%"
+        style="transform: none; height: 100%;"
+        class="parallax-background"
       >
         <v-row align="center" justify="center">
           <v-col class="text-center" cols="12">
@@ -33,7 +34,6 @@ export default {
 * >>>.v-parallax__image { 
     transform: translate(-50%, 200px) !important;
 }
-
 
 
 .pulse-button {
@@ -102,6 +102,16 @@ export default {
     width: 200px;
     height: 200px;
     opacity: 0;
+  }
+}
+
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) { 
+  
+  .parallax-background {
+    background-attachment:scroll !important;
+    background-size: cover !important;
+    transform: none;
+    height: 80% !important;
   }
 }
 
