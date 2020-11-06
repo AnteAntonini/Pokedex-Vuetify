@@ -1,7 +1,7 @@
   <template>
   <v-app>
     <v-main class="pa-0 ">
-      <v-container style="mb-15 height: 100%" class="px-0">
+      <v-container style="height: 100%; width: 100%" class="px-0 pb-0 mb-10">
         <v-card
           v-for="pokemon in singlePokemon"
           :key="pokemon.id"
@@ -77,10 +77,10 @@
                 :src="
                   `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png`
                 "
-                style="height: 400px; width:450px; background: #f2f2f2"
+                style="height: 400px; width:500px; background: #f2f2f2"
               ></v-img>
               <div class="pokemon-stats-info ">
-                <v-col
+                <!-- <v-col
                   align="left"
                   class="mt-2 pa-0"
                   style="width: 450px; height:280px; background: grey; border-radius: 10px"
@@ -99,7 +99,11 @@
                       }}</span>
                     </v-col>
                   </v-row>
-                </v-col>
+                </v-col> -->
+                <canvas
+                id="planet-chart"
+                style="width: 450px; height: 290px;margin-top: 10px"
+              ></canvas>
               </div>
             </v-col>
 
@@ -215,16 +219,6 @@
             </v-col>
           </v-row>
         </v-card>
-        <v-row>
-          <v-col cols="12" sm="6">
-            <v-container cols="6">
-              <canvas
-                id="planet-chart"
-                style="width: 450px; height: 290px;"
-              ></canvas>
-            </v-container>
-          </v-col>
-        </v-row>
       </v-container>
     </v-main>
   </v-app>
@@ -358,7 +352,7 @@ export default {
       this.paginationRight = 1;
     }
   },
-  beforeUpdate() {
+  updated() {
   this.createChart('planet-chart');
   }
 };
