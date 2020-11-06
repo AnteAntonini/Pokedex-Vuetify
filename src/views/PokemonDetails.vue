@@ -174,8 +174,11 @@
                             <v-card-text
                               style="color: white; font-size: 25px; text-transform: capitalize"
                               >{{ pokemonAbility }}
-                              <p class="mt-3" style="font-size: 12px">
+                              <p v-if="pokemon.id > 3" class="mt-3" style="font-size: 12px">
                                 {{PokemonAbilityDetailed}}
+                              </p>
+                              <p v-else class="mt-3" style="font-size: 12px">
+                                {{PokemonAbilityDetailedOther}}
                               </p>
                             </v-card-text>
                           </v-card>
@@ -253,7 +256,8 @@ export default {
       paginationRight: '',
       pokemonNamesPagination: [],
       dialog: false,
-      PokemonAbilityDetailed: ''
+      PokemonAbilityDetailed: '',
+      PokemonAbilityDetailedOther: ''
    }
   },
   methods: {
@@ -311,6 +315,8 @@ export default {
     
     this.PokemonAbilityDetailed = ability.data.effect_entries[1].short_effect;
     console.log(this.PokemonAbilityDetailed)
+    this.PokemonAbilityDetailedOther = ability.data.effect_entries[0].short_effect;
+    console.log(this.PokemonAbilityDetailedOther)
 
     for (let i = 1; i <= 50; i++) {         //zbog redoslijeda
       const resNames = await this.axios.get(`https://pokeapi.co/api/v2/pokemon/${i}`)
