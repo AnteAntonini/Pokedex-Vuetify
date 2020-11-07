@@ -2,6 +2,15 @@
   <v-app>
     <v-main class="pa-0 ">
       <v-container style="height: 100%; width: 100%" class="px-0 pb-0 mb-10">
+        <v-overlay :opacity="1" :value="overlay">
+          <h1 class="mb-5">Loading pokemon...</h1>
+          <v-progress-circular
+            :size="70"
+            :width="7"
+            color="purple"
+            indeterminate
+          ></v-progress-circular>
+        </v-overlay> 
         <v-card
           v-for="pokemon in singlePokemon"
           :key="pokemon.id"
@@ -77,7 +86,7 @@
                 :src="
                   `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png`
                 "
-                style="height: 400px; width:500px; background: #f2f2f2"
+                style="height: 450px; width:500px; background: #f2f2f2"
               ></v-img>
               <div class="pokemon-stats-info ">
                 <!-- <v-col
@@ -101,9 +110,9 @@
                   </v-row>
                 </v-col> -->
                 <canvas
-                id="planet-chart"
-                style="width: 450px; height: 290px;margin-top: 10px"
-              ></canvas>
+                  id="planet-chart"
+                  style="width: 450px; height: 290px;margin-top: 10px"
+                ></canvas>
               </div>
             </v-col>
 
@@ -178,11 +187,15 @@
                             <v-card-text
                               style="color: white; font-size: 25px; text-transform: capitalize"
                               >{{ pokemonAbility }}
-                              <p v-if="pokemon.id > 3" class="mt-3" style="font-size: 12px">
-                                {{PokemonAbilityDetailed}}
+                              <p
+                                v-if="pokemon.id > 3"
+                                class="mt-3"
+                                style="font-size: 12px"
+                              >
+                                {{ PokemonAbilityDetailed }}
                               </p>
                               <p v-else class="mt-3" style="font-size: 12px">
-                                {{PokemonAbilityDetailedOther}}
+                                {{ PokemonAbilityDetailedOther }}
                               </p>
                             </v-card-text>
                           </v-card>
@@ -251,8 +264,12 @@ export default {
       pokemonNamesPagination: [],
       dialog: false,
       PokemonAbilityDetailed: '',
-      PokemonAbilityDetailedOther: ''
+      PokemonAbilityDetailedOther: '',
+      overlay: true,
    }
+  },
+  beforeUpdate() {
+    this.overlay =  false
   },
   methods: {
     async createChart(chartId) {

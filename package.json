@@ -5,8 +5,7 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint",
-    "start": "npm start"
+    "lint": "vue-cli-service lint"
   },
   "dependencies": {
     "axios": "^0.21.0",
@@ -14,7 +13,7 @@
     "core-js": "^3.6.5",
     "cors": "^2.8.5",
     "express": "^4.17.1",
-    "heroku": "^7.47.0",
+    "firebase": "^8.0.1",
     "mongodb": "^3.6.2",
     "nodemon": "^2.0.6",
     "vue": "^2.6.11",
