@@ -6,8 +6,8 @@
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
   <link rel="icon" href="<%= BASE_URL %>favicon.ico">
   <title><%= htmlWebpackPlugin.options.title %></title>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@latest/css/materialdesignicons.min.css">
+  <link rel="stylesheet preload prefetch" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900&display=swap" as="style" crossorigin>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@latest/css/materialdesignicons.min.css" as="style">
 </head>
 
 <body>
@@ -16,29 +16,5 @@
       Please enable it to continue.</strong>
   </noscript>
   <div id="app"></div>
-
-
-
-
-  <!-- The core Firebase JS SDK is always required and must be listed first -->
-  <script src="https://www.gstatic.com/firebasejs/8.0.1/firebase-app.js"></script>
-
-  <!-- TODO: Add SDKs for Firebase products that you want to use
-     https://firebase.google.com/docs/web/setup#available-libraries -->
-
-  <script>
-    // Your web app's Firebase configuration
-    var firebaseConfig = {
-      apiKey: "AIzaSyDDJDk8rgT2Zgu1Ymj0HL6mdvMokk61B_I",
-      authDomain: "pokedex-vuetify.firebaseapp.com",
-      databaseURL: "https://pokedex-vuetify.firebaseio.com",
-      projectId: "pokedex-vuetify",
-      storageBucket: "pokedex-vuetify.appspot.com",
-      messagingSenderId: "724144118350",
-      appId: "1:724144118350:web:0a698bb4845fc9b91bc11f"
-    };
-    // Initialize Firebase
-    firebase.initializeApp(firebaseConfig);
-  </script>
 </body>
 </html>

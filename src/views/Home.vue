@@ -9,7 +9,7 @@
       >
         <v-row align="center" justify="center">
           <v-col class="text-center" cols="12">
-            <h1 class="heading display-3 font-weight-thin  mb-5" style="position: relative; top: -100px;" >
+            <h1 class="heading font-weight-thin  mb-5" style="position: relative; top: -100px;" >
               Pokedex
             </h1>
             <h4 class="subheading" style="position: relative; top: -100px;">
@@ -35,6 +35,17 @@ export default {
     transform: translate(-50%, 200px) !important;
 }
 
+.heading {
+  opacity: 0.0;
+  animation: fadeIn ease 5s;
+  animation-fill-mode: forwards;   
+  font-size: 6rem;   
+}                                                 /* Setting forwards value «the target will retain the computed values set by the last keyframe encountered during execution» */
+.subheading {
+  opacity: 0.0;
+  animation: fadeIn ease 5s;
+  animation-fill-mode: forwards;
+}
 
 .pulse-button {
   width: 150px;
@@ -92,6 +103,11 @@ export default {
 
 
 
+@keyframes fadeIn {
+  0% {opacity:0;}
+  100% {opacity:1;}
+}
+
 @keyframes ring {
   0% {
     width: 30px;
@@ -112,6 +128,11 @@ export default {
     background-size: cover !important;
     transform: none;
     height: 80% !important;
+  }
+}
+@media only screen and (max-width: 768px) {
+  .heading {
+    font-size: 3.75rem !important;
   }
 }
 

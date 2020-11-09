@@ -3,14 +3,14 @@
     <!-- v-container, onda nece ic preko footer-a  za parallax-->
     <v-main class="pa-0 pt-3">
       <v-container style="background: white; height: 100%" >
-        <v-row >
+        <v-row>
           <v-col
             cols="6"
             sm="4"
             md="3"
             lg="2"
             v-for="(pokemon, index) in pokemonDetails"
-            :key="pokemon.id"
+            :key="index"
             align="center" 
           >
           <v-hover v-slot="{ hover }">
@@ -40,6 +40,7 @@
             </v-card>
             </v-hover>
           </v-col>
+          <v-btn class="mx-auto my-3" style="text-transform: capitalize; background: #3dc7ef; color: white; " @click="loadMorePokemons()">Load more Pokémon </v-btn>
         </v-row>
       </v-container>
     </v-main>
@@ -52,12 +53,28 @@ export default {
   data() {
     return {
       pokemonDetails: [],
+      offset: 0,
+      indexPokemon: 0,
 
     };
   },
+  methods: {
+   async loadMorePokemons() {
+    let id = 18;;
+    let i;
+    for (i = 1; i <= id; i++) {               /* uradio sam async zato sto redoslijed nije bio dobar,zato sam koristio await (odredeni stavri se prije ucitaju pa poremete redoslijed) */
+      const res = await this.axios.get(`https://pokeapi.co/api/v2/pokemon/${i}`)
+      const data = await res.data;
+      this.pokemonDetails.push(data);
+    }
+    i+=17;
+    id+=18;
+    }
+  },
   async created() {
-    const id = 50;
-    for (let i = 1; i <= id; i++) {               /* uradio sam async zato sto redoslijed nije bio dobar,zato sam koristio await (odredeni stavri se prije ucitaju pa poremete redoslijed) */
+    const id = 18;
+    let i;
+    for (i = 1; i <= id; i++) {               /* uradio sam async zato sto redoslijed nije bio dobar,zato sam koristio await (odredeni stavri se prije ucitaju pa poremete redoslijed) */
       const res = await this.axios.get(`https://pokeapi.co/api/v2/pokemon/${i}`)
       const data = await res.data;
       this.pokemonDetails.push(data);
