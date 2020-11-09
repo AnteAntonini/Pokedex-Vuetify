@@ -2,7 +2,7 @@
   <v-app>
     <v-main class="pa-0 ">
       <v-container style="height: 100%; width: 100%" class="px-0 pb-0 mb-10">
-        <v-overlay :opacity="1" :value="overlay">
+         <v-overlay :opacity="1" :value="overlay">
           <h1 class="mb-5">Loading pokemon...</h1>
           <v-progress-circular
             :size="70"
@@ -10,7 +10,8 @@
             color="purple"
             indeterminate
           ></v-progress-circular>
-        </v-overlay> 
+        </v-overlay>
+
         <v-card
           v-for="pokemon in singlePokemon"
           :key="pokemon.id"
@@ -83,6 +84,7 @@
             <v-col cols="12" sm="6">
               <v-img
                 class="pokemon-image"
+                lazy-src="#"
                 :src="
                   `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png`
                 "

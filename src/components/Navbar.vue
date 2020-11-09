@@ -4,18 +4,28 @@
       v-model="drawer"
       app
       temporary
-      src="https://cdn.bulbagarden.net/upload/a/a7/PSMD_poster.png"
       style="height: 100%"
       class="v-navigation-drawer"
     >
-      <v-list shaped>   <!-- v-list can be lowered with dense property. -->
+    <v-row column style="height:150px; background: url('https://cdn.vuetifyjs.com/images/parallax/material2.jpg')">
+      <v-col class="pa-0 pl-3 pt-4">
+        <v-avatar class="ml-5 mt-3" size="60" style="border: 2px solid white">
+          <v-img src="https://cdn.vuetifyjs.com/images/john.jpg"></v-img>
+        </v-avatar>
+        <p class="row-paragraph mt-1 font-weight-medium">Ante Antonini</p>
+        <div class="row-paragraph" style="font-size: 12px">name@gmail.com
+          <span class="pl-5"> <v-icon class="pl-15" color="white">mdi-chevron-down</v-icon>
+          </span>
+          </div>
+      </v-col>
+    </v-row>
+      <v-list>   <!-- v-list can be lowered with dense property. -->
         <!--  nav styling that reduces the width v-list-item takes up as well as adding a border radius. -->
         <v-list-item
           v-for="([icon, text, route], i) in items"
           :key="i"
           router
           :to="route"
-          style="background: #039BE5; opacity: 0.9"
         >
           <v-list-item-action>
             <v-icon>{{ icon }}</v-icon>
@@ -81,6 +91,10 @@ export default {
 </script>
 
 <style>
+.row-paragraph {
+  color: white;
+  margin: 0 0 0 20px !important;
+}
 .v-input .v-label {
   line-height: 15px !important;
   font-size: 12px;
@@ -90,7 +104,7 @@ export default {
   font-size: 10px;
 }
 .v-list-item--active {
-  background: #0277BD !important;
+  color: blue !important;
 }
 
 @media all and (max-width: 600px) {
