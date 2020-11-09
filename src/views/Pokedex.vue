@@ -18,7 +18,7 @@
               <div style="height:70%; background: #CFD8DC">
 
               <v-avatar  size="140" color="grey lighten-2" > 
-                <v-img class="pokemon-image" 
+                <v-img class="pokemon-image" alt="no image"
                 :src="`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${index + 1}.png`"></v-img>
               </v-avatar>
               <div class="number my-3 white blue-grey lighten-2">#{{ index + 1 }}</div>
@@ -32,7 +32,7 @@
               <v-card-text class="pa-0" style="font-size: 12px">
                 <span
                  :class="`type ${types.type.name} mt-1 mx-2 `" v-for="types in pokemon.types" :key="types.id"
-                style="color: white; border-radius: 5px; display:inline-block; width: 70px">
+                 style="color: white; border-radius: 5px; display:inline-block; width: 70px">
                  {{ types.type.name }}
                 </span>
               </v-card-text>
