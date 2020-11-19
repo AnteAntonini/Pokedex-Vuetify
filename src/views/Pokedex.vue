@@ -40,8 +40,9 @@
             </v-card>
             </v-hover>
           </v-col>
-          <v-btn class="mx-auto my-3" style="text-transform: capitalize; background: #3dc7ef; color: white; " @click="loadMorePokemons()">Load more Pokémon </v-btn>
+          
         </v-row>
+        <v-btn class="mx-auto my-3" style="text-transform: capitalize; background: #3dc7ef; color: white; " @click="loadMorePokemons()">Load more Pokémon </v-btn>
       </v-container>
     </v-main>
   </v-app>
@@ -60,19 +61,19 @@ export default {
   },
   methods: {
    async loadMorePokemons() {
-    let id = 18;;
+    let id = 12;
     let i;
     for (i = 1; i <= id; i++) {               /* uradio sam async zato sto redoslijed nije bio dobar,zato sam koristio await (odredeni stavri se prije ucitaju pa poremete redoslijed) */
       const res = await this.axios.get(`https://pokeapi.co/api/v2/pokemon/${i}`)
       const data = await res.data;
       this.pokemonDetails.push(data);
     }
-    i+=17;
-    id+=18;
+    i+=11;
+    id+=12;
     }
   },
   async created() {
-    const id = 18;
+    const id = 12;
     let i;
     for (i = 1; i <= id; i++) {               /* uradio sam async zato sto redoslijed nije bio dobar,zato sam koristio await (odredeni stavri se prije ucitaju pa poremete redoslijed) */
       const res = await this.axios.get(`https://pokeapi.co/api/v2/pokemon/${i}`)

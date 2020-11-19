@@ -47,7 +47,7 @@
   
       <v-toolbar-title>
         <v-btn to="/"  text 
-        style="width: 180px; height: 64px; color: #f5f5f5;" class="pl-8 mr-10">
+        style="width: 180px; height: 64px; color: #f5f5f5;" class="image-button pl-8">
 
         <!-- za centriranje title u sredinu toolbar-a !!-->
         <v-img src="@/assets/Pokemon-Logo.png"
@@ -58,19 +58,7 @@
       </v-toolbar-title>
 
       <v-spacer></v-spacer>
-
-      <!-- <v-switch                          //switch dark theme
-        v-model="$vuetify.theme.dark"
-        hint="Toggles theme mode"
-        label="Dark Mode"
-        persistent-hint
-        dense
-      ></v-switch> -->
-      <!-- inset = Enlarge the v-switch track to encompass the thumb -->
-
-      <!-- <v-btn icon>
-        <v-icon>mdi-dots-vertical</v-icon>
-      </v-btn> -->
+      <v-btn class="login-btn" to="/login">Login</v-btn>
     </v-app-bar>
   </nav>
 </template>
@@ -115,6 +103,11 @@ export default {
     height: 45px !important;
     width: 110px !important;
     margin-left: 15px;
+  }
+  .login-btn {
+    height: 30px !important;
+    font-size: 10px !important;
+    padding: 0 !important;
   }
 }
 </style>

@@ -92,26 +92,6 @@
                 style="height: 450px; width:500px; background: #f2f2f2"
               ></v-img>
               <div class="pokemon-stats-info ">
-                <!-- <v-col
-                  align="left"
-                  class="mt-2 pa-0"
-                  style="width: 450px; height:280px; background: grey; border-radius: 10px"
-                >
-                  <div class="pt-3 pa-6">Stats</div>
-
-                  <v-row class="text-center mx-2" style="font-size: 8px">
-                    <v-col
-                      v-for="n in pokemonStatsInfo"
-                      :key="n"
-                      class="stats-col pa-0"
-                    >
-                      <li v-for="n in 15" :key="n" class="mx-1 mb-1 white"></li>
-                      <span style="font-size: 10px; font-weight: bold">{{
-                        n
-                      }}</span>
-                    </v-col>
-                  </v-row>
-                </v-col> -->
                 <canvas
                   id="planet-chart"
                   style="width: 450px; height: 290px;margin-top: 10px"
@@ -220,18 +200,6 @@
                   {{ type.type.name }}
                 </span>
               </v-col>
-              <!--  <v-col>
-                <div class="type-weakness">Weaknesses</div>
-                <span
-                  :class="
-                    `type ${weakness.name} mr-2 mb-2 py-1 text-center type-style`
-                  "
-                  v-for="weakness in pokemonWeakness"
-                  :key="weakness.id"
-                >
-                  {{ weakness.name }}
-                </span>
-              </v-col> -->
             </v-col>
           </v-row>
         </v-card>
@@ -338,14 +306,8 @@ export default {
       this.pokemonNamesPagination.push(namesArray);
     }
 
-
-    /* const weak = await this.axios.get(
-      `https://pokeapi.co/api/v2/type/${this.pokemonName}`
-    ); */
-
     const data = await res.data;
     
-    /* this.pokemonWeakness = weak.data.damage_relations.double_damage_from; */
     this.pokemonType = res.data.types;
     this.pokemonStats = res.data.stats;
 

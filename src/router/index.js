@@ -30,6 +30,18 @@ const routes = [
     name: "PokemonDetails",
     component: () =>
       import(/* webpackChunkName: "PokemonDetails" */ "../views/PokemonDetails.vue")
+  },
+  {
+    path: "/register",
+    name: "Register",
+    component: () =>
+      import("../components/Register.vue")
+  },
+  {
+    path: "/login",
+    name: "Login",
+    component: () =>
+      import("../components/Login.vue")
   }
 ];
 
