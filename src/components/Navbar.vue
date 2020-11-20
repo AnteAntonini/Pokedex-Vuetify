@@ -12,10 +12,10 @@
         <v-avatar class="ml-5 mt-3" size="60" style="border: 2px solid white">
           <v-img src="https://cdn.vuetifyjs.com/images/john.jpg"></v-img>
         </v-avatar>
-        <p class="row-paragraph mt-1 font-weight-medium">Ante Antonini</p>
-        <div class="row-paragraph" style="font-size: 12px">name@gmail.com
-          <span class="pl-5"> <v-icon class="pl-15" color="white">mdi-chevron-down</v-icon>
-          </span>
+        <p class="row-paragraph mt-1 font-weight-medium">{{firstname}} {{lastname}}</p>
+        <div class="row-paragraph" style="font-size: 12px">{{email}}
+          <!-- <span class="pl-5"> <v-icon class="pl-15" color="white">mdi-chevron-down</v-icon>
+          </span> -->
           </div>
       </v-col>
     </v-row>
@@ -59,6 +59,7 @@
 
       <v-spacer></v-spacer>
       <v-btn class="login-btn" to="/login">Login</v-btn>
+      <v-btn @click="logout" to="/">Logout</v-btn>
     </v-app-bar>
   </nav>
 </template>
@@ -68,14 +69,31 @@ export default {
   name: "Navbar",
 
   data: () => ({
+    firstname: '',
+    lastname: '',
+    email: '',
     drawer: false,
     items: [
       ["mdi-home-import-outline", "Home", "/"],
       ["mdi-pokeball", "Pokedex", "/pokedex"],
       ["mdi-information-outline", "About", "/about"]
     ]
-  })
-};
+  }),
+  updated() {
+    this.axios.get('http://localhost:5000/user', {headers: { token: localStorage.getItem('token')}})
+      .then(res => {
+        this.firstname = res.data.user.firstname,
+        this.lastname = res.data.user.lastname,
+        this.email = res.data.user.email
+      })
+  },
+  methods: {
+    logout() {
+      localStorage.clear();
+      this.$router.push('/login')
+    }
+  }
+  }
 </script>
 
 <style>

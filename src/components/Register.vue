@@ -2,9 +2,7 @@
   <v-form v-model="valid">
     <v-container>
       <v-row style="width: 80%" class="ma-auto mt-10">
-        <v-col
-          cols="12"
-        >
+        <v-col cols="12">
           <v-text-field
             v-model="firstname"
             :rules="nameRules"
@@ -14,9 +12,7 @@
           ></v-text-field>
         </v-col>
 
-        <v-col
-          cols="12"
-        >
+        <v-col cols="12">
           <v-text-field
             v-model="lastname"
             :rules="nameRules"
@@ -26,20 +22,17 @@
           ></v-text-field>
         </v-col>
 
-        <v-col
-          cols="12"
-        >
+        <v-col cols="12">
           <v-text-field
             v-model="email"
             :rules="emailRules"
             label="E-mail"
             required
           ></v-text-field>
+          <p class="red--text text-left">{{ error }}</p>
         </v-col>
 
-         <v-col
-          cols="12"
-        >
+        <v-col cols="12">
           <v-text-field
             v-model="password"
             :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
@@ -51,7 +44,7 @@
             counter
             @click:append="show1 = !show1"
           ></v-text-field>
-          <v-btn class="button-register">Register</v-btn>
+          <v-btn class="button-register" @click="signup">Register</v-btn>
         </v-col>
       </v-row>
     </v-container>
@@ -65,6 +58,7 @@
       valid: false,
       firstname: '',
       lastname: '',
+      error: '',
       nameRules: [
         v => !!v || 'Name is required',
         v => v.length <= 10 || 'Name must be less than 10 characters',
@@ -82,6 +76,23 @@
             emailMatch: () => (`The email and password you entered don't match`),
         }, 
     }),
+    methods: {
+      signup() {
+        let newUser = {
+          firstname: this.firstname,
+          lastname: this.lastname,
+          email: this.email,
+          password: this.password
+        }
+        this.axios.post('http://localhost:5000/signup', newUser).then(res => {
+          this.error = '';
+          this.$router.push('/login');
+        },err => {
+          console.log(err.response);
+          this.error = err.response.data.error;
+        })
+      }
+    }
   }
 </script>
 

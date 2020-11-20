@@ -32,8 +32,10 @@
             counter
             @click:append="show1 = !show1"
           ></v-text-field>
-          <v-btn to="/" @click="validate" :disabled="!valid" color="#4dad5b" class="button">Log In</v-btn>
+          <v-btn   @click="login" :disabled="!valid" color="#4dad5b" class="button">Log In</v-btn>
+         
         </v-col>
+         <p class="red--text mx-auto mt-2">{{error}}</p>
       </v-row>
     </v-container>
   </v-form>
@@ -52,16 +54,11 @@
 
 <script>
   export default {
-    name: 'Register',
+    name: 'Login',
     data: () => ({
       valid: false,
-      firstname: '',
-      lastname: '',
-      nameRules: [
-        v => !!v || 'Name is required',
-        v => v.length <= 10 || 'Name must be less than 10 characters',
-      ],
       email: '',
+      error: '',
       emailRules: [
         v => !!v || 'E-mail is required',
         v => /.+@.+/.test(v) || 'E-mail must be valid',
@@ -77,6 +74,23 @@
     methods: {
       validate () {
         this.$refs.form.validate()
+      },
+      login() {
+        let user = {
+          email: this.email,
+          password: this.password
+        }
+        this.axios.post('http://localhost:5000/login', user)
+        .then( res=> {
+          //if successfull
+          if(res.status === 200) {
+            localStorage.setItem('token', res.data.token); //saving token in localStorage
+            this.$router.push('/');
+          }
+        }, err=> {
+          console.log(err.response);
+          this.error = err.response.data.error;
+        })
       }
     },
   }
