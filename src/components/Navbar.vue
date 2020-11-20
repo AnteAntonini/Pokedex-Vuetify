@@ -58,20 +58,22 @@
       </v-toolbar-title>
 
       <v-spacer></v-spacer>
-      <v-btn class="login-btn" to="/login">Login</v-btn>
-      <v-btn @click="logout" to="/">Logout</v-btn>
+      <v-btn class="login-btn" v-if="auth== ''" to="/login">Login</v-btn>
+      <v-btn v-if="auth=='loggedin'" @click="logout" to="/">Logout</v-btn>
     </v-app-bar>
   </nav>
 </template>
 
 <script>
+import EventBus from '../components/eventbus'
+
 export default {
   name: "Navbar",
-
   data: () => ({
     firstname: '',
     lastname: '',
     email: '',
+    auth: '',
     drawer: false,
     items: [
       ["mdi-home-import-outline", "Home", "/"],
@@ -89,11 +91,25 @@ export default {
   },
   methods: {
     logout() {
-      localStorage.clear();
+      localStorage.clear()
       this.$router.push('/login')
+      this.auth = ''
+      this.firstname= '',
+      this.lastname= '',
+      this.email = ''
     }
-  }
-  }
+  },
+  mounted() {
+    EventBus.$on('isLoggedIn', status => {
+      this.auth = status
+    })
+  },
+/*   beforeDestroy() {
+    EventBus.$off('isLoggedIn', () => {
+      console.log('izbrisano')
+    });
+  } */
+}
 </script>
 
 <style>

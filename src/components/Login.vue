@@ -53,6 +53,8 @@
 
 
 <script>
+import EventBus from '../components/eventbus'
+
   export default {
     name: 'Login',
     data: () => ({
@@ -86,11 +88,15 @@
           if(res.status === 200) {
             localStorage.setItem('token', res.data.token); //saving token in localStorage
             this.$router.push('/');
+            this.emitMethod();
           }
         }, err=> {
           console.log(err.response);
           this.error = err.response.data.error;
         })
+      },
+      emitMethod() {
+        EventBus.$emit('isLoggedIn', 'loggedin');
       }
     },
   }
