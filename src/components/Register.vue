@@ -51,6 +51,7 @@
             counter
             @click:append="show1 = !show1"
           ></v-text-field>
+          <v-btn class="button-register">Register</v-btn>
         </v-col>
       </v-row>
     </v-container>
@@ -83,3 +84,17 @@
     }),
   }
 </script>
+
+<style scoped>
+.button-register {
+  text-transform: capitalize;
+  color: white !important;
+  background-color: #30a7d7 !important;
+  width: 200px !important;
+  height: 45px !important;
+  margin-top: 40px;
+  font-size: 18px;
+  font-weight: 400;
+}
+</style>>
+
